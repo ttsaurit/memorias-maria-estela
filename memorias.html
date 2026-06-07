@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;1,300;1,400&family=Cormorant+SC:wght@300;400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
   --papel: #f5f0e8;
   --tinta: #1a1714;
@@ -15,9 +14,7 @@
   --tinta-muy-suave: #c8c0b4;
   --rojo: #8b2e1a;
 }
-
 html { height: 100%; }
-
 body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
@@ -31,29 +28,23 @@ body {
   justify-content: center;
   padding: 3rem 2rem 4rem;
 }
-
 .contenedor {
   width: 100%;
   max-width: 340px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
   animation: aparecer 1s ease forwards;
 }
-
 @keyframes aparecer {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
-/* Encabezado */
 .encabezado {
   text-align: center;
   width: 100%;
   margin-bottom: 3rem;
 }
-
 .titulo-libro {
   font-family: 'Cormorant SC', serif;
   font-weight: 300;
@@ -63,14 +54,12 @@ body {
   text-transform: uppercase;
   margin-bottom: 1.8rem;
 }
-
 .separador {
   width: 36px;
   height: 1px;
   background: var(--tinta-muy-suave);
   margin: 0 auto 1.8rem;
 }
-
 .num-cap {
   font-family: 'Cormorant Garant', serif;
   font-style: italic;
@@ -80,7 +69,6 @@ body {
   color: var(--tinta-suave);
   margin-bottom: 0.5rem;
 }
-
 .nombre-cap {
   font-family: 'Cormorant Garant', serif;
   font-weight: 400;
@@ -88,8 +76,6 @@ body {
   line-height: 1.2;
   color: var(--tinta);
 }
-
-/* Zona grabación */
 .zona {
   width: 100%;
   display: flex;
@@ -97,7 +83,6 @@ body {
   align-items: center;
   gap: 2rem;
 }
-
 .instruccion {
   font-size: 16px;
   font-weight: 300;
@@ -107,8 +92,6 @@ body {
   line-height: 1.6;
   min-height: 50px;
 }
-
-/* BOTÓN — tamaño explícito para Safari */
 .btn-grabar {
   width: 80px;
   height: 80px;
@@ -124,10 +107,9 @@ body {
   -webkit-tap-highlight-color: transparent;
   -webkit-appearance: none;
   appearance: none;
-  transition: background 0.3s ease, border-color 0.3s ease;
+  transition: border-color 0.3s ease;
   flex-shrink: 0;
 }
-
 .circulo {
   width: 22px;
   height: 22px;
@@ -138,32 +120,13 @@ body {
   transition: all 0.3s ease;
   flex-shrink: 0;
 }
-
-.btn-grabar.grabando {
-  border-color: var(--rojo);
-  animation: pulso 2s ease-in-out infinite;
-}
-
-.btn-grabar.grabando .circulo {
-  background: var(--rojo);
-  border-radius: 5px;
-  width: 20px;
-  height: 20px;
-  min-width: 20px;
-  min-height: 20px;
-}
-
+.btn-grabar.grabando { border-color: var(--rojo); animation: pulso 2s ease-in-out infinite; }
+.btn-grabar.grabando .circulo { background: var(--rojo); border-radius: 5px; width: 20px; height: 20px; min-width: 20px; min-height: 20px; }
 @keyframes pulso {
   0%, 100% { box-shadow: 0 0 0 0 rgba(139,46,26,0.2); }
   50%       { box-shadow: 0 0 0 14px rgba(139,46,26,0); }
 }
-
-.btn-grabar:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-/* Timer */
+.btn-grabar:disabled { opacity: 0.3; cursor: not-allowed; }
 .timer {
   font-family: 'Cormorant SC', serif;
   font-weight: 300;
@@ -175,29 +138,10 @@ body {
   transition: opacity 0.4s ease;
 }
 .timer.visible { opacity: 1; }
-
-/* Reproductor nativo — oculto hasta necesitarlo */
-.reproductor {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.2rem;
-  width: 100%;
-}
+.reproductor { display: none; flex-direction: column; align-items: center; gap: 1.2rem; width: 100%; }
 .reproductor.visible { display: flex; }
-
-audio {
-  width: 100%;
-  height: 40px;
-  -webkit-appearance: none;
-}
-
-.acciones {
-  display: flex;
-  gap: 2.5rem;
-  align-items: center;
-}
-
+audio { width: 100%; height: 40px; }
+.acciones { display: flex; gap: 2.5rem; align-items: center; }
 .btn-txt {
   background: none;
   border: none;
@@ -214,70 +158,19 @@ audio {
 }
 .btn-txt.principal { color: var(--tinta); border-bottom-color: var(--tinta); }
 .btn-txt:disabled { opacity: 0.4; }
-
-/* Estado subida */
-.estado {
-  font-size: 15px;
-  font-style: italic;
-  color: var(--tinta-suave);
-  text-align: center;
-  min-height: 22px;
-}
-
-.error {
-  font-size: 14px;
-  color: var(--rojo);
-  text-align: center;
-  font-style: italic;
-  display: none;
-}
+.estado { font-size: 15px; font-style: italic; color: var(--tinta-suave); text-align: center; min-height: 22px; }
+.error { font-size: 14px; color: var(--rojo); text-align: center; font-style: italic; display: none; }
 .error.visible { display: block; }
-
-/* Pantalla éxito */
-.exito {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  text-align: center;
-  width: 100%;
-  animation: aparecer 0.8s ease forwards;
-}
+.exito { display: none; flex-direction: column; align-items: center; gap: 1.5rem; text-align: center; width: 100%; animation: aparecer 0.8s ease forwards; }
 .exito.visible { display: flex; }
-
 .exito-linea { width: 36px; height: 1px; background: var(--tinta-muy-suave); }
-
-.exito-msg {
-  font-size: 18px;
-  font-weight: 300;
-  font-style: italic;
-  color: var(--tinta-suave);
-  line-height: 1.7;
-}
-
-.exito-nombre {
-  font-family: 'Cormorant SC', serif;
-  font-weight: 300;
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  color: var(--tinta-muy-suave);
-}
-
-/* Pie */
-.pie {
-  margin-top: 4rem;
-  font-family: 'Cormorant SC', serif;
-  font-weight: 300;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  color: var(--tinta-muy-suave);
-}
+.exito-msg { font-size: 18px; font-weight: 300; font-style: italic; color: var(--tinta-suave); line-height: 1.7; }
+.exito-nombre { font-family: 'Cormorant SC', serif; font-weight: 300; font-size: 12px; letter-spacing: 0.2em; color: var(--tinta-muy-suave); }
+.pie { margin-top: 4rem; font-family: 'Cormorant SC', serif; font-weight: 300; font-size: 11px; letter-spacing: 0.15em; color: var(--tinta-muy-suave); }
 </style>
 </head>
 <body>
-
 <div class="contenedor">
-
   <div class="encabezado">
     <div class="titulo-libro">Las habitaciones de una vida</div>
     <div class="separador"></div>
@@ -287,13 +180,10 @@ audio {
 
   <div class="zona" id="zona">
     <div class="instruccion" id="instruccion">Tocá el círculo para comenzar a grabar.</div>
-
     <button class="btn-grabar" id="btn-grabar" aria-label="Grabar">
       <div class="circulo"></div>
     </button>
-
     <div class="timer" id="timer">0:00</div>
-
     <div class="reproductor" id="reproductor">
       <audio id="audio-prev" controls></audio>
       <div class="acciones">
@@ -301,7 +191,6 @@ audio {
         <button class="btn-txt principal" id="btn-guardar">Guardar</button>
       </div>
     </div>
-
     <div class="estado" id="estado"></div>
     <div class="error" id="error"></div>
   </div>
@@ -315,7 +204,6 @@ audio {
   </div>
 
   <div class="pie">Memorias · 2025</div>
-
 </div>
 
 <script>
@@ -339,20 +227,17 @@ const CAPS = {
   17: ["Capítulo XIII", "Lo que sé ahora"],
 };
 
-const TOKEN = "sl.u.AGjMvGBaDy2TY3J84oKhTwHKCjC04SmFn_0WfI0zp0u4OtzKY3Ij8lx2SXtgK1CkVXFUsRZQ6xn9bDlWoCIYrj-eyXxFrjMrxVCrZfKRJgLoA0Isdz4W3TEZKj2MVndgKYv_resRIrUY6Hyvzmm_iXXp1UnipC4fXpo4Qg43K3xJgakxS4GdkGwMpk8wD-m2pd4qNRcP-N2_GhUlwDPsjXNWMQkx0vqrrGxznRCLRsolBLL6T0RcA9cdS9yaHyB6nl1Ph040uE_L_MSGLP7PlTJPuxIGSwObCrdJv0E0cVnN8rtRa6UoMQzJtqx2GACGnenjo1JVTVS-al4UyePYDFNzM0M2zQGLeludBhexEqQ1LtDWWQ-BqQcKPW8pezfiJA6U1ZQU5iJpZc5JzeRou4S6sYMaVbuYrenXnzXvK-VuA9WXAEvOwIeIxXfeglPmQbISmtfZuItdS2OKswV5tijRhhy0qqB5i-587xbH7ku7YnHeAyUkOikaAmoSzKaHNntZM6d_QxSv_HCSs1-lECAzTWyR_eTHWdAvlcd_YYtZb6zZt2zUASf0mwaC2wY4hNt0c-wa6wOpTbB7ffEtzAD0HktghR03ivkvRyZBbai5eP9CmZUWD3XJiyzB8qizcwDvyvXTorf-WKtpftSHFkLHM2G-aM8bvSL6fb5J3afo_0KyXGwfpeP4Qq6l3cle8FZQNuRw6dShkfROpI_8uPeQ_4txfoRuFJkr0-SwtumageLCSoii2Jk2jj_HYe9nwG4hFKgX-WFG3Lo3u7TVPIUexaESV9ofwZuP8RfN9E82_y0Yn07m29qFN6pH6GUBJuCvP9UrevAAqMA0BIwZvIU2nY43eNWYBvdyTclkq6foM7Kb_Hg4XvHcjU333_1__4HbkrDk7dcDjvCom_c0KQL1LW3WVB2bqWWVHUPSwtvLVBhV9UsjB03DAptTaToG2BVEF934Lm0pEhr5LbiD4cAocejsrg9Xr7nTcf3FDBpEWZTRaJdTCeYVC6uwDc67g7dD-Z4ZPF1ehPYgjhnHAOuTC0-3gT4WZpKMEl1jr9DWSMzAQQM2kL3lAh-2Mx-lS2s2NqUkg0rlCZNGA55BP8kaE5tNCniBJo2-IdZWvBvq2euCJgmVDELwLCj-tZ3yXUSzgNXH4uSACDs4vudqDojtbZIa-DZApWjZyPxtSXSAggtdEGbSbDNx6Am1keYu4wS6nJkB0tA4eKJ79WhCXj0UOQ-11t0j4ALPZgZYQ-Y4PCm8DNRbcX-SFChcQBU3lZWEZ8PX7j1P-qq80NS5dmeA5F5WNZSSvZUDMB_MEj6qxg";
 const CARPETA = "/Memorias Maria Estela";
 
 let recorder, chunks = [], grabando = false, blob = null;
 let timerInt, secs = 0, capNum = 1;
 
-// Init capítulo
 const p = new URLSearchParams(location.search);
 capNum = parseInt(p.get("cap")) || 1;
 if (!CAPS[capNum]) capNum = 1;
 document.getElementById("num-cap").textContent = CAPS[capNum][0];
 document.getElementById("nombre-cap").textContent = CAPS[capNum][1];
 
-// Refs
 const btnG   = document.getElementById("btn-grabar");
 const instr  = document.getElementById("instruccion");
 const timer  = document.getElementById("timer");
@@ -363,7 +248,6 @@ const err    = document.getElementById("error");
 const exito  = document.getElementById("exito");
 const zona   = document.getElementById("zona");
 
-// Timer helpers
 function startTimer() {
   secs = 0; updateTimer();
   timerInt = setInterval(() => { secs++; updateTimer(); }, 1000);
@@ -374,12 +258,10 @@ function updateTimer() {
   timer.textContent = m + ":" + String(s).padStart(2,"0");
 }
 
-// Grabar
 btnG.addEventListener("click", async () => {
   if (!grabando) {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      // Safari prefiere audio/mp4
       const mime = MediaRecorder.isTypeSupported("audio/mp4") ? "audio/mp4" : "audio/webm";
       recorder = new MediaRecorder(stream, { mimeType: mime });
       chunks = [];
@@ -391,7 +273,7 @@ btnG.addEventListener("click", async () => {
         instr.textContent = "Escuchá tu grabación antes de guardarla.";
         stream.getTracks().forEach(t => t.stop());
       };
-      recorder.start(1000); // timeslice para Safari
+      recorder.start(1000);
       grabando = true;
       btnG.classList.add("grabando");
       timer.classList.add("visible");
@@ -409,12 +291,11 @@ btnG.addEventListener("click", async () => {
   }
 });
 
-// Descartar
 document.getElementById("btn-descartar").addEventListener("click", reset);
 
-// Guardar
 document.getElementById("btn-guardar").addEventListener("click", async () => {
   if (!blob) return;
+
   const ext = blob.type.includes("mp4") ? "m4a" : "webm";
   const ts = new Date().toISOString().replace(/[:.]/g,"-").slice(0,19);
   const ruta = CARPETA + "/cap" + String(capNum).padStart(2,"0") + "_" + ts + "." + ext;
@@ -426,16 +307,21 @@ document.getElementById("btn-guardar").addEventListener("click", async () => {
   err.classList.remove("visible");
 
   try {
-    const r = await fetch("https://content.dropboxapi.com/2/files/upload", {
+    // Convertir blob a base64
+    const arrayBuffer = await blob.arrayBuffer();
+    const uint8 = new Uint8Array(arrayBuffer);
+    let binary = "";
+    for (let i = 0; i < uint8.length; i++) binary += String.fromCharCode(uint8[i]);
+    const audioBase64 = btoa(binary);
+
+    const response = await fetch("/.netlify/functions/upload", {
       method: "POST",
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Dropbox-API-Arg": JSON.stringify({ path: ruta, mode: "add", autorename: true }),
-        "Content-Type": "application/octet-stream"
-      },
-      body: blob
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ audioBase64, mimeType: blob.type, ruta })
     });
-    if (!r.ok) throw new Error("Dropbox error");
+
+    if (!response.ok) throw new Error("Error en servidor");
+
     zona.style.display = "none";
     exito.classList.add("visible");
   } catch(e) {
@@ -447,7 +333,6 @@ document.getElementById("btn-guardar").addEventListener("click", async () => {
   }
 });
 
-// Otro
 document.getElementById("btn-otro").addEventListener("click", () => {
   exito.classList.remove("visible");
   zona.style.display = "flex";
