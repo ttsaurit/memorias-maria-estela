@@ -3,17 +3,12 @@ exports.handler = async function(event) {
     return { statusCode: 405, body: "Method not allowed" };
   }
 
-  const TOKEN = "sl.u.AGjJreg1-uM0pchcXYrGEv51-CvnPlItUaQxPabMsf0LuYqtCQyVQbn_jOU0b8PKZew_GBAw4-v6n6IHPdHAfxZjwyMqb5b4ILQxNikXdN7qUolxyJgHXzlA8KcnXa2aOnTZWqZYcnpDriGx4ur6rLgQxdsYDEiU9lPpLNEtvcOaIKugHW9Dy7qiJIA_TKZK-sIrdsAYdRnkJJT7iAsYsxcW_qt4LEOKfMXz7hQdCBIIq-BS_QRJHCzTtVjtk_cB9MI_TSAF2SiaARBjpkhncgv0leGzXoov0gBaYtBwK9EVxXHKeMw9S5UGqJyDnz_i4q3B_285yWwI5BCc5qI2d8UaT4TUmd3oRWdsm7NVxEGjGUbzAjLJJ27K1yjwl1LRHeD4ha3rFT_pz5msx6Tnh29FaxJ98VLk6KvsvUt-c6bmaD0q3Bl-8uXDBGlzqHUrpmAUIZya53rseoSZWT5xhmvYsxzDDqUZvgAwiJAtpl9to4zKHGeMvRrQygnhNmbpZ71SupROdte5L_FltuFL37QiKSpM9kvCf8oNq7qGJceqEHyOMFvVei00ANZHvyk7nLj_ZQpoxzgIz-P6cc0WXkfCB6SnVF4p4RGpMj68JJ39lysPLH74kmdOQDAFTRfvKl6guvBw8UDow7RWDOtcSrFb40GSWAF3hqT4ZZMty9RrWvFm_X76AfheS_OV4WsddTkI-lB9wRVJBFtax493jY11Avy7J8ly96li_kdOwM6w5I1WNu-NM618U7nBzhQgJfuAdCh951jZMLQRSwq_sJZSfetqvYrZcrOZ2FRJTiPPAq_Ypg385ry0_b36Ooaxfklq4yTYYDqXfnYJEdM56EfFNEwAYsLX4LmKnjMdw9JxCTB53Dpn6DCXb9_-NzIa8gWc21YuMMxd74miCktiGuIs08aLvkBaQhAdZIIeACE-0BaPJylkylIwpdzjZSu30kccC8tHDUfRxSMJfXhcHsi0AgekH3cIq9hdjLL2sncq0C6oiwo-ia-zsA0NYptR-uda9hJiGkGOnu__aOM_vLtr3iLYQOrSCGDTsZDo71zBnpNkfavHyPns6VUIBJDBPt24xWkeuvkZ4Jle51Cdv5wEIMWWhX3-kumNDrZqdqWWDhK9sm6mkqQdhWynurJ0IbFPke8qVeVE1b91zO_xKhUheKQ-mcXZUcAkw3y8BcwBMMOO9G1Ux_3Q7UaoJ8OQHNc4FqhVo6xohPU3GnpQSAt0dhx_SMlhAb6SrMQkVU4cqnTPz1AwoF4cA6Asuj3AypZv3XGf2ogX1yOn6ZoQiM9N9HUGrfcMb-8dygH9-xqXdw";
+  const TOKEN = "sl.u.AGgcR0bTH8vKaKw2W9NLNv16f7chn5SnLzebok9Y_UdioYiCae-WsOyQylghPu4zkxWvuF7l86l6oA4AFOgObPCSnCOShJvkpv_9jMhVFmDS7BlBkNHcSkg__JIgjh7ISECpTOcfOCXnEWycdMuWSygh4Kw0xJy2ODL6VIloBeHHWopuDQQTDIC6ktDNDFTFl5Z7HecAeRr0cnrHli53o56UYhMife9kgp2jKmAqTmd-58YO8cofBQeEDgV4RomcmlEsvH28TJ8sAr3nLAWmt58IezeGJ4GUzX3JfRYq70jETZcBFQwjvS4Pk2J0pFSn6p9cDCDS6Czq4fm-6Jz7lZvhXzFjHJfHY5ReAkZRecNRwoBvs97ogpt59hFfaiQSTDrsvOuulHHbCcouFzrjCVn5jVSZIJ0Wm4-6awJfQLXo4fKUXKBXJjinQKFon5qIT7F3F2vcPzvZ0ZOThCWwl-EBFNULMKv0Vkc8F6tWz03jRl8LVyv7G7DvTYbE02syaU7cLJoAulnVcNUBQLN1Ui-WwpGZ2mEfK5BTHTsrxnP1NJDo1lqdXuPz9d4Ti6SBPX8_7c41fpocBPb3EG2mrAF1T4w1hfGysZSJRMr8p4Lmyed0pC-v7yTV88uVjCbLD4pp8pJ2RzIKJCqwn_bEDy7hwFeJX5SBCLIOu4268avw27nmZqHUt7p-LBt3Y8nrVzIJfM_n-5cP9joWclLwIuEfwWpZnWiGVLyvNW7IPsWxRn6VV5uQ5RgCSwv_r27y5TvkHEPwX3bqHToyR8xe1yIf1uapH9g22_UiNldb3984qOOlNwwql4eESfPK1JeZ1y75udt_KZ5_crNR6VXEnVx7j6V8rQXDQhS5VOlSH8RlfaLbpp44u1lCM0qo1K11olW4vg1K6LbtnerGYduFlC6Ky0Q0LylLFueWIqAod0kIDvvAnrAZKAXrcpFoe5u6wDkRLV-lFwj0UApnuvLaGHMadbh88KQucg2QwbiJUHggmUI4Q0GZPdM1LmX5JzXTCXO3IhVcMTfiIHc31LxhCePe7ekW_01bISx35VVNPfOLQb522KD2QJ1FQG8Obm8nOe25C4p5FKsAb_wJ5LzoE_Z5ORrAXAScz3XP8L0ovpBHoVQpHZq_eIWZWnrxUaW-QxOtMmWItMxYFlUkDpaA1Ozf3f7Xkr1l9TFSG-ubEUfWrQz84IM8AuUbStutDp1p5QrQkdEliGyjOVw-CwSTsr8A33UsZ5CHRCkT-bdcPM4QR3KsljpHUoxMnrc0hz6oGCXcbhOabKk3Ow5on3jA83RewZGMmRnGXG347My5DqbuCw";
 
   try {
     const parsed = JSON.parse(event.body);
     const { audioBase64, ruta } = parsed;
-
-    console.log("ruta:", ruta);
-    console.log("audioBase64 length:", audioBase64 ? audioBase64.length : "MISSING");
-
     const buffer = Buffer.from(audioBase64, "base64");
-    console.log("buffer size:", buffer.length);
 
     const r = await fetch("https://content.dropboxapi.com/2/files/upload", {
       method: "POST",
@@ -30,8 +25,6 @@ exports.handler = async function(event) {
     });
 
     const responseText = await r.text();
-    console.log("Dropbox status:", r.status);
-    console.log("Dropbox response:", responseText);
 
     if (!r.ok) {
       return {
@@ -48,7 +41,6 @@ exports.handler = async function(event) {
     };
 
   } catch(e) {
-    console.log("CATCH error:", e.message);
     return {
       statusCode: 500,
       headers: { "Access-Control-Allow-Origin": "*" },
