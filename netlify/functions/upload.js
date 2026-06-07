@@ -1,37 +1,62 @@
 exports.handler = async function(event) {
-  if (event.httpMethod === "GET") {
-    const TOKEN = "sl.u.AGjMvGBaDy2TY3J84oKhTwHKCjC04SmFn_0WfI0zp0u4OtzKY3Ij8lx2SXtgK1CkVXFUsRZQ6xn9bDlWoCIYrj-eyXxFrjMrxVCrZfKRJgLoA0Isdz4W3TEZKj2MVndgKYv_resRIrUY6Hyvzmm_iXXp1UnipC4fXpo4Qg43K3xJgakxS4GdkGwMpk8wD-m2pd4qNRcP-N2_GhUlwDPsjXNWMQkx0vqrrGxznRCLRsolBLL6T0RcA9cdS9yaHyB6nl1Ph040uE_L_MSGLP7PlTJPuxIGSwObCrdJv0E0cVnN8rtRa6UoMQzJtqx2GACGnenjo1JVTVS-al4UyePYDFNzM0M2zQGLeludBhexEqQ1LtDWWQ-BqQcKPW8pezfiJA6U1ZQU5iJpZc5JzeRou4S6sYMaVbuYrenXnzXvK-VuA9WXAEvOwIeIxXfeglPmQbISmtfZuItdS2OKswV5tijRhhy0qqB5i-587xbH7ku7YnHeAyUkOikaAmoSzKaHNntZM6d_QxSv_HCSs1-lECAzTWyR_eTHWdAvlcd_YYtZb6zZt2zUASf0mwaC2wY4hNt0c-wa6wOpTbB7ffEtzAD0HktghR03ivkvRyZBbai5eP9CmZUWD3XJiyzB8qizcwDvyvXTorf-WKtpftSHFkLHM2G-aM8bvSL6fb5J3afo_0KyXGwfpeP4Qq6l3cle8FZQNuRw6dShkfROpI_8uPeQ_4txfoRuFJkr0-SwtumageLCSoii2Jk2jj_HYe9nwG4hFKgX-WFG3Lo3u7TVPIUexaESV9ofwZuP8RfN9E82_y0Yn07m29qFN6pH6GUBJuCvP9UrevAAqMA0BIwZvIU2nY43eNWYBvdyTclkq6foM7Kb_Hg4XvHcjU333_1__4HbkrDk7dcDjvCom_c0KQL1LW3WVB2bqWWVHUPSwtvLVBhV9UsjB03DAptTaToG2BVEF934Lm0pEhr5LbiD4cAocejsrg9Xr7nTcf3FDBpEWZTRaJdTCeYVC6uwDc67g7dD-Z4ZPF1ehPYgjhnHAOuTC0-3gT4WZpKMEl1jr9DWSMzAQQM2kL3lAh-2Mx-lS2s2NqUkg0rlCZNGA55BP8kaE5tNCniBJo2-IdZWvBvq2euCJgmVDELwLCj-tZ3yXUSzgNXH4uSACDs4vudqDojtbZIa-DZApWjZyPxtSXSAggtdEGbSbDNx6Am1keYu4wS6nJkB0tA4eKJ79WhCXj0UOQ-11t0j4ALPZgZYQ-Y4PCm8DNRbcX-SFChcQBU3lZWEZ8PX7j1P-qq80NS5dmeA5F5WNZSSvZUDMB_MEj6qxg";
+  const TOKEN = "sl.u.AGjJreg1-uM0pchcXYrGEv51-CvnPlItUaQxPabMsf0LuYqtCQyVQbn_jOU0b8PKZew_GBAw4-v6n6IHPdHAfxZjwyMqb5b4ILQxNikXdN7qUolxyJgHXzlA8KcnXa2aOnTZWqZYcnpDriGx4ur6rLgQxdsYDEiU9lPpLNEtvcOaIKugHW9Dy7qiJIA_TKZK-sIrdsAYdRnkJJT7iAsYsxcW_qt4LEOKfMXz7hQdCBIIq-BS_QRJHCzTtVjtk_cB9MI_TSAF2SiaARBjpkhncgv0leGzXoov0gBaYtBwK9EVxXHKeMw9S5UGqJyDnz_i4q3B_285yWwI5BCc5qI2d8UaT4TUmd3oRWdsm7NVxEGjGUbzAjLJJ27K1yjwl1LRHeD4ha3rFT_pz5msx6Tnh29FaxJ98VLk6KvsvUt-c6bmaD0q3Bl-8uXDBGlzqHUrpmAUIZya53rseoSZWT5xhmvYsxzDDqUZvgAwiJAtpl9to4zKHGeMvRrQygnhNmbpZ71SupROdte5L_FltuFL37QiKSpM9kvCf8oNq7qGJceqEHyOMFvVei00ANZHvyk7nLj_ZQpoxzgIz-P6cc0WXkfCB6SnVF4p4RGpMj68JJ39lysPLH74kmdOQDAFTRfvKl6guvBw8UDow7RWDOtcSrFb40GSWAF3hqT4ZZMty9RrWvFm_X76AfheS_OV4WsddTkI-lB9wRVJBFtax493jY11Avy7J8ly96li_kdOwM6w5I1WNu-NM618U7nBzhQgJfuAdCh951jZMLQRSwq_sJZSfetqvYrZcrOZ2FRJTiPPAq_Ypg385ry0_b36Ooaxfklq4yTYYDqXfnYJEdM56EfFNEwAYsLX4LmKnjMdw9JxCTB53Dpn6DCXb9_-NzIa8gWc21YuMMxd74miCktiGuIs08aLvkBaQhAdZIIeACE-0BaPJylkylIwpdzjZSu30kccC8tHDUfRxSMJfXhcHsi0AgekH3cIq9hdjLL2sncq0C6oiwo-ia-zsA0NYptR-uda9hJiGkGOnu__aOM_vLtr3iLYQOrSCGDTsZDo71zBnpNkfavHyPns6VUIBJDBPt24xWkeuvkZ4Jle51Cdv5wEIMWWhX3-kumNDrZqdqWWDhK9sm6mkqQdhWynurJ0IbFPke8qVeVE1b91zO_xKhUheKQ-mcXZUcAkw3y8BcwBMMOO9G1Ux_3Q7UaoJ8OQHNc4FqhVo6xohPU3GnpQSAt0dhx_SMlhAb6SrMQkVU4cqnTPz1AwoF4cA6Asuj3AypZv3XGf2ogX1yOn6ZoQiM9N9HUGrfcMb-8dygH9-xqXdw";
 
-    const { ruta } = JSON.parse(event.queryStringParameters?.ruta ? '{"ruta":"' + event.queryStringParameters.ruta + '"}' : '{"ruta":"/Memorias Maria Estela/audio.m4a"}');
-
-    const r = await fetch("https://api.dropboxapi.com/2/files/get_temporary_upload_link", {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer " + TOKEN,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        commit_info: {
-          path: ruta,
-          mode: "add",
-          autorename: true
-        },
-        duration: 300
-      })
-    });
-
-    if (!r.ok) {
-      const e = await r.text();
-      return { statusCode: 500, body: e };
-    }
-
-    const data = await r.json();
+  if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 200,
-      headers: { "Access-Control-Allow-Origin": "*" },
-      body: JSON.stringify({ upload_url: data.link })
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type"
+      },
+      body: ""
     };
   }
 
-  return { statusCode: 405, body: "Method not allowed" };
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method not allowed" };
+  }
+
+  try {
+    const { ruta } = JSON.parse(event.body);
+    const buffer = Buffer.from(event.body, "base64");
+
+    // Usar upload session para manejar cualquier tamaño
+    const r = await fetch("https://content.dropboxapi.com/2/files/upload", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + TOKEN,
+        "Dropbox-API-Arg": JSON.stringify({
+          path: ruta,
+          mode: "add",
+          autorename: true,
+          mute: false
+        }),
+        "Content-Type": "application/octet-stream"
+      },
+      body: Buffer.from(JSON.parse(event.body).audioBase64, "base64")
+    });
+
+    if (!r.ok) {
+      const txt = await r.text();
+      return {
+        statusCode: 500,
+        headers: { "Access-Control-Allow-Origin": "*" },
+        body: JSON.stringify({ error: txt })
+      };
+    }
+
+    return {
+      statusCode: 200,
+      headers: { "Access-Control-Allow-Origin": "*" },
+      body: JSON.stringify({ ok: true })
+    };
+
+  } catch(e) {
+    return {
+      statusCode: 500,
+      headers: { "Access-Control-Allow-Origin": "*" },
+      body: JSON.stringify({ error: e.message })
+    };
+  }
 };
