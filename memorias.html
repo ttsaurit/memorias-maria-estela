@@ -40,11 +40,7 @@ body {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.encabezado {
-  text-align: center;
-  width: 100%;
-  margin-bottom: 3rem;
-}
+.encabezado { text-align: center; width: 100%; margin-bottom: 3rem; }
 .titulo-libro {
   font-family: 'Cormorant SC', serif;
   font-weight: 300;
@@ -54,12 +50,7 @@ body {
   text-transform: uppercase;
   margin-bottom: 1.8rem;
 }
-.separador {
-  width: 36px;
-  height: 1px;
-  background: var(--tinta-muy-suave);
-  margin: 0 auto 1.8rem;
-}
+.separador { width: 36px; height: 1px; background: var(--tinta-muy-suave); margin: 0 auto 1.8rem; }
 .num-cap {
   font-family: 'Cormorant Garant', serif;
   font-style: italic;
@@ -76,13 +67,7 @@ body {
   line-height: 1.2;
   color: var(--tinta);
 }
-.zona {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-}
+.zona { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 2rem; }
 .instruccion {
   font-size: 16px;
   font-weight: 300;
@@ -93,28 +78,21 @@ body {
   min-height: 50px;
 }
 .btn-grabar {
-  width: 80px;
-  height: 80px;
-  min-width: 80px;
-  min-height: 80px;
+  width: 80px; height: 80px;
+  min-width: 80px; min-height: 80px;
   border-radius: 50%;
   border: 1.5px solid var(--tinta);
   background: transparent;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: none;
-  appearance: none;
+  -webkit-appearance: none; appearance: none;
   transition: border-color 0.3s ease;
   flex-shrink: 0;
 }
 .circulo {
-  width: 22px;
-  height: 22px;
-  min-width: 22px;
-  min-height: 22px;
+  width: 22px; height: 22px;
+  min-width: 22px; min-height: 22px;
   border-radius: 50%;
   background: var(--tinta);
   transition: all 0.3s ease;
@@ -129,12 +107,10 @@ body {
 .btn-grabar:disabled { opacity: 0.3; cursor: not-allowed; }
 .timer {
   font-family: 'Cormorant SC', serif;
-  font-weight: 300;
-  font-size: 18px;
+  font-weight: 300; font-size: 18px;
   letter-spacing: 0.12em;
   color: var(--tinta-suave);
-  height: 24px;
-  opacity: 0;
+  height: 24px; opacity: 0;
   transition: opacity 0.4s ease;
 }
 .timer.visible { opacity: 1; }
@@ -143,13 +119,11 @@ body {
 audio { width: 100%; height: 40px; }
 .acciones { display: flex; gap: 2.5rem; align-items: center; }
 .btn-txt {
-  background: none;
-  border: none;
+  background: none; border: none;
   border-bottom: 1px solid transparent;
   cursor: pointer;
   font-family: 'Cormorant Garant', serif;
-  font-size: 15px;
-  letter-spacing: 0.08em;
+  font-size: 15px; letter-spacing: 0.08em;
   color: var(--tinta-suave);
   padding: 0.2rem 0;
   transition: color 0.2s, border-color 0.2s;
@@ -228,7 +202,6 @@ const CAPS = {
 };
 
 const CARPETA = "/Memorias Maria Estela";
-
 let recorder, chunks = [], grabando = false, blob = null;
 let timerInt, secs = 0, capNum = 1;
 
@@ -298,7 +271,7 @@ document.getElementById("btn-guardar").addEventListener("click", async () => {
 
   const ext = blob.type.includes("mp4") ? "m4a" : "webm";
   const ts = new Date().toISOString().replace(/[:.]/g,"-").slice(0,19);
-  const ruta = "/Memorias Maria Estela/cap" + String(capNum).padStart(2,"0") + "_" + ts + "." + ext;
+  const ruta = CARPETA + "/cap" + String(capNum).padStart(2,"0") + "_" + ts + "." + ext;
 
   btnG.disabled = true;
   document.getElementById("btn-guardar").disabled = true;
@@ -307,22 +280,31 @@ document.getElementById("btn-guardar").addEventListener("click", async () => {
   err.classList.remove("visible");
 
   try {
-    // Paso 1: obtener URL temporal de Dropbox
-    const linkRes = await fetch("/.netlify/functions/upload?ruta=" + encodeURIComponent(ruta));
-    if (!linkRes.ok) throw new Error("No se pudo obtener link");
-    const { upload_url } = await linkRes.json();
+    // Convertir blob a base64
+    const arrayBuffer = await blob.arrayBuffer();
+    const bytes = new Uint8Array(arrayBuffer);
+    let binary = "";
+    const chunkSize = 8192;
+    for (let i = 0; i < bytes.length; i += chunkSize) {
+      binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize));
+    }
+    const audioBase64 = btoa(binary);
 
-    // Paso 2: subir directo a Dropbox
-    const uploadRes = await fetch(upload_url, {
+    const response = await fetch("/.netlify/functions/upload", {
       method: "POST",
-      headers: { "Content-Type": "application/octet-stream" },
-      body: blob
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ audioBase64, mimeType: blob.type, ruta })
     });
 
-    if (!uploadRes.ok) throw new Error("Error al subir");
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || "Error en servidor");
+    }
 
     zona.style.display = "none";
     exito.classList.add("visible");
+
   } catch(e) {
     estado.textContent = "";
     mostrarError("No se pudo guardar. Intentá de nuevo.");
