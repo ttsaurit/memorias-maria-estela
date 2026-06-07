@@ -298,7 +298,7 @@ document.getElementById("btn-guardar").addEventListener("click", async () => {
 
   const ext = blob.type.includes("mp4") ? "m4a" : "webm";
   const ts = new Date().toISOString().replace(/[:.]/g,"-").slice(0,19);
-  const ruta = CARPETA + "/cap" + String(capNum).padStart(2,"0") + "_" + ts + "." + ext;
+  const ruta = "/Memorias Maria Estela/cap" + String(capNum).padStart(2,"0") + "_" + ts + "." + ext;
 
   btnG.disabled = true;
   document.getElementById("btn-guardar").disabled = true;
@@ -307,20 +307,19 @@ document.getElementById("btn-guardar").addEventListener("click", async () => {
   err.classList.remove("visible");
 
   try {
-    // Convertir blob a base64
-    const arrayBuffer = await blob.arrayBuffer();
-    const uint8 = new Uint8Array(arrayBuffer);
-    let binary = "";
-    for (let i = 0; i < uint8.length; i++) binary += String.fromCharCode(uint8[i]);
-    const audioBase64 = btoa(binary);
+    // Paso 1: obtener URL temporal de Dropbox
+    const linkRes = await fetch("/.netlify/functions/upload?ruta=" + encodeURIComponent(ruta));
+    if (!linkRes.ok) throw new Error("No se pudo obtener link");
+    const { upload_url } = await linkRes.json();
 
-    const response = await fetch("/.netlify/functions/upload", {
+    // Paso 2: subir directo a Dropbox
+    const uploadRes = await fetch(upload_url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ audioBase64, mimeType: blob.type, ruta })
+      headers: { "Content-Type": "application/octet-stream" },
+      body: blob
     });
 
-    if (!response.ok) throw new Error("Error en servidor");
+    if (!uploadRes.ok) throw new Error("Error al subir");
 
     zona.style.display = "none";
     exito.classList.add("visible");
